@@ -1,0 +1,71 @@
+<div class="form-inline">
+  <h4>Add Task</h4>
+  <div style="width:77.5%" class="panel panel-info">
+    <div class="row" style="height:5px;"></div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="TaskName">Task Name:</label>
+      </div>
+      <div class="col-sm-4">
+        <input type="text" class="form-control input-sm" [(ngModel)]="task.taskName" />
+      </div>
+    </div>
+
+    <div class="row" style="height:3px;"></div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="Priority">Priority:</label>
+      </div>
+      <div class="col-sm-4">
+        <input type="range" class="slider" min="0" max="100" value="0" [(ngModel)]="task.priority" />
+      </div>
+    </div>
+    <div class="row" style="height:3px;"></div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="Parent"> Parent Task:</label>
+      </div>
+      <div class="col-sm-4">
+        <select [(ngModel)]="task.parentID" id="Parent">
+          <option value="" disabled selected>select a Task</option>
+          <option *ngFor="let item of Parents" [value]="item.parentID">{{item.parentName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" style="height:3px;"></div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="StartDate"> Start Date:</label>
+      </div>
+      <div class="col-sm-4">
+        <input type="date" class="form-control input-sm" [ngModel]="task.startDate | date:'yyyy-MM-dd'" (ngModelChange)="task.startDate= $event" />
+      </div>
+    </div>
+    <div class="row" style="height:3px;"></div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="EndDate"> End Date:</label>
+      </div>
+      <div class="col-sm-4">
+        <input type="date" class="form-control input-sm" [ngModel]="task.endDate| date:'yyyy-MM-dd'" (ngModelChange)="task.endDate= $event" />
+      </div>
+    </div>
+    <div class="row" style="height:3px;"></div>
+    <div class="row" style="height:3px;"></div>
+    <div class="row" style="height:3px;"></div>
+    <div class="row">
+      <div class="col-sm-3 " style="align-items:center;">
+        <div class="btn-group">
+          <button class="col-xs-3 btn-primary btn-block" (click)="submitTask()">Add</button>
+        </div>
+        <div class="btn-group">
+          <button class="col-xs-3 btn-reset btn-block">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="message!=''" class="row" style="height:3px;">
+      <div>{{message}}</div>
+    </div>
+    <div class="row" style="height:3px;"></div>
+  </div>
+</div>

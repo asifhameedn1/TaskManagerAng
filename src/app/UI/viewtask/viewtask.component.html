@@ -1,0 +1,90 @@
+<div class="form-inline" style="width:88%;">
+    <div class="panel">
+        <div class="row">
+            <div class="col-sm-2">
+                <label for="Task">Task Name:</label>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-inline" placeholder="task" [(ngModel)]="searchTask" />
+            </div>
+            <div class="col-sm-2">
+                <label for="ParentTask">Parent Task:</label>
+            </div>
+            <div class="col-sm-4">
+                <!-- <select [(ngModel)]="parentID" id="Parent" (ngModelChange)='parentChange($event)'>
+                    <option value="0" selected>select a Parent Task</option>
+                    <option *ngFor="let item of Parents" [value]="item.parentID">{{item.parentName}}</option>
+                </select> -->
+                <input type="text" class="form-inline" [(ngModel)]="parentName" placeholder="task" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <label for="Priority">Priority From:</label>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-inline" placeholder="Priority From" [(ngModel)]="priorityFrom" />
+            </div>
+            <div class="col-sm-2">
+                <label for="Priority">Priority To:</label>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-inline" placeholder="Priority To" [(ngModel)]="priorityTo">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <label for="Start Date">Start Date:</label>
+            </div>
+            <div class="col-sm-4">
+                <input type="date" placeholder="Start Date" [(ngModel)]="startDate" >
+            </div>
+            <div class="col-sm-2">
+                <label for="End Date">End Date:</label>
+            </div>
+            <div class="col-sm-4">
+                <input type="date" placeholder="End Date" [(ngModel)]="endDate">
+            </div>
+        </div>
+    </div>
+    <h4>View Task</h4>
+    <div style="width:88%" class="panel panel-info">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Parent Task</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of tasks|taskFilter:searchTask:parentID:parentName:priorityFrom:priorityTo:startDate:endDate">
+                    <td>
+                        {{item.taskName}}
+                    </td>
+                    <td>{{item.parentName}}</td>
+                    <td>{{item.priority}}</td>
+                    <td>{{item.startDate|date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item.endDate|date: 'dd/MM/yyyy'}}
+                    </td>
+                    <td>
+                        <!-- <input type="button" class="btn-edit" value="Edit" routerLink="/edittask"> -->
+                        <a href="#" class="btn btn-primary a-btn-slide-text" routerLink="/edit/{{item.id}}">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            <span><strong>Edit</strong></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-danger a-btn-slide-text" (click)="deleteTask(item.id)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span><strong>Delete</strong></span> </a>
+                        <!-- <input type="button" value="x Delete" class="btn btn-danger"/> -->
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
